@@ -37,7 +37,7 @@ class DetoxExportWrapper {
     let configError, exposeGlobals, resolvedConfig;
 
     const chromeTracing = new ChromeTracing()
-      .startProcess({ id: process.env.DETOX_START_TIMESTAMP, name: 'detox' })
+      .startProcess({ id: 0, name: 'detox' })
       .startThread({ id: process.pid, name: `Worker #${process.pid}` });
     systrace.init(chromeTracing);
 

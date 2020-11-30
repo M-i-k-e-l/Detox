@@ -19,16 +19,14 @@ class SysTrace {
 
 const systrace = new SysTrace();
 async function systraceCall(sectionName, func) {
-  let error;
-
   systrace.startSection(sectionName);
   try {
-    return await func();
-  } catch (e) {
-    error = e;
-    throw e;
-  } finally {
-    systrace.endSection(sectionName, { error });
+    const result = await func();
+    systrace.endSection(sectionName, { success: true });
+    return result;
+  } catch (error) {
+    systrace.endSection(sectionName, { success: false, error: error.toString() });
+    throw error;
   }
 }
 
